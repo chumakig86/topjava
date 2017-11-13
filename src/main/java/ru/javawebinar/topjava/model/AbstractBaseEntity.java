@@ -22,8 +22,5 @@ public abstract class AbstractBaseEntity {
         return this.id == null;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Entity %s (%s)", getClass().getName(), id);
-    }
+
 }
