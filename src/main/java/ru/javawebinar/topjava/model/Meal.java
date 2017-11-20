@@ -17,6 +17,10 @@ public class Meal extends AbstractBaseEntity {
 
     private int calories;
 
+    public Meal(Meal m) {
+        this(m.getId(), m.getDateTime(), m.description, m.getCalories());
+    }
+
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
