@@ -13,6 +13,7 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Arrays;
 
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
@@ -36,7 +37,7 @@ public class MealServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(MEAL1_ID, USER_ID);
-        assertMatch(service.getAll(USER_ID), MEAL6, MEAL5, MEAL4, MEAL3, MEAL2);
+        MATCHER.assertCollectionEquals(Arrays.asList(MEAL6, MEAL5, MEAL4, MEAL3, MEAL2), service.getAll(USER_ID));
     }
 
     @Test(expected = NotFoundException.class)
@@ -48,13 +49,13 @@ public class MealServiceTest {
     public void testSave() throws Exception {
         Meal created = getCreated();
         service.create(created, USER_ID);
-        assertMatch(service.getAll(USER_ID), created, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
+        MATCHER.assertCollectionEquals(Arrays.asList(created, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1), service.getAll(USER_ID));
     }
 
     @Test
     public void testGet() throws Exception {
         Meal actual = service.get(ADMIN_MEAL_ID, ADMIN_ID);
-        assertMatch(actual, ADMIN_MEAL1);
+        MATCHER.assertEquals(ADMIN_MEAL1, actual);
     }
 
     @Test(expected = NotFoundException.class)
@@ -66,7 +67,7 @@ public class MealServiceTest {
     public void testUpdate() throws Exception {
         Meal updated = getUpdated();
         service.update(updated, USER_ID);
-        assertMatch(service.get(MEAL1_ID, USER_ID), updated);
+        MATCHER.assertEquals(updated, service.get(MEAL1_ID, USER_ID));
     }
 
     @Test(expected = NotFoundException.class)
@@ -76,13 +77,14 @@ public class MealServiceTest {
 
     @Test
     public void testGetAll() throws Exception {
-        assertMatch(service.getAll(USER_ID), MEALS);
+        MATCHER.assertCollectionEquals(MEALS, service.getAll(USER_ID));
     }
 
     @Test
     public void testGetBetween() throws Exception {
-        assertMatch(service.getBetweenDates(
-                LocalDate.of(2015, Month.MAY, 30),
-                LocalDate.of(2015, Month.MAY, 30), USER_ID), MEAL3, MEAL2, MEAL1);
+        MATCHER.assertCollectionEquals(Arrays.asList(MEAL3, MEAL2, MEAL1),
+                service.getBetweenDates(
+                        LocalDate.of(2015, Month.MAY, 30),
+                        LocalDate.of(2015, Month.MAY, 30), USER_ID));
     }
 }
