@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface CrudUserRepository extends JpaRepository<User, Integer> {
@@ -23,8 +22,8 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
     @Transactional
     User save(User user);
 
-    //@Override
-    Optional<User> findById(Integer id);
+    @Override
+    User findOne(Integer id);
 
     @Override
     List<User> findAll(Sort sort);

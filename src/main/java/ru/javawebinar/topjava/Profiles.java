@@ -6,11 +6,19 @@ public class Profiles {
             JPA = "jpa",
             DATAJPA = "datajpa";
 
-    public static final String REPOSITORY_IMPLEMENTATION = DATAJPA;
+    public static final String REPOSITORY_IMPLEMENTATION = getActiveImplementation();
+
+    // TODO: 16.08.17 Наверное, здесь!
+    private static String getActiveImplementation() {
+        return JPA;
+    }
 
     public static final String
             POSTGRES_DB = "postgres",
             HSQL_DB = "hsqldb";
+
+    public static final String ACTIVE_DB = POSTGRES_DB;
+    public static final String ACTIVE_SPRING_PROFILE = DATAJPA;
 
     //  Get DB profile depending of DB driver in classpath
     public static String getActiveDbProfile() {

@@ -1,12 +1,12 @@
 package ru.javawebinar.topjava.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
@@ -29,16 +29,14 @@ public class User extends AbstractNamedEntity {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
-    @Size(max = 100)
     private String email;
 
     @Column(name = "password", nullable = false)
     @NotBlank
-    @Size(min = 5, max = 64)
+    @Length(min = 5)
     private String password;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
-    @NotNull
     private boolean enabled = true;
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
@@ -122,7 +120,7 @@ public class User extends AbstractNamedEntity {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", email=" + email +
                 ", name=" + name +
                 ", enabled=" + enabled +
