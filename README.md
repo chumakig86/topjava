@@ -1,130 +1,23 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a3090cdac212404d80d8d289dbc61870)](https://www.codacy.com/app/javawebinar/topjava)
-[![Build Status](https://travis-ci.org/JavaWebinar/topjava.svg?branch=master)](https://travis-ci.org/JavaWebinar/topjava)
-[![VersionEye](https://www.versioneye.com/user/projects/5a14435c0fb24f2a6d408cde/badge.svg)](https://www.versioneye.com/user/projects/5a14435c0fb24f2a6d408cde)
+## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZFdWWFdwams0eGM">Домашнее задание HW05</a>
 
-Java Enterprise Online Project
-===============================
+- 1: Имплементировать `DataJpaMealRepositoryImpl`
+- 2: Разделить реализации Repository по профилям Spring: `jdbc`, `jpa`, `datajpa` (общее в профилях можно объединять, например `<beans profile="datajpa,jpa">`). 
+  - 2.1: Профили выбора DB (`postgres/hsqldb`) и реализации репозитория (`jdbc/datajpa/jpa`) независимы друг от друга и при запуске задать приложения (тестов) нужно задать тот и другой. 
+  - 2.2: Для интеграции с IDEA не забудте выставить в `spring-db.xml` справа вверху в `Change Profiles...` профили, например `datajpa, postgres`
+  - 2.3: Общие части для всех в `spring-db.xml` можно оставить как есть без профилей вверху файла (до первого `<beans profile=` ).
+- 3: Сделать тесты всех реализаций (`jdbc, jpa, datajpa`) через наследование (без дублирования)
+  -  3.1 **сделать один базовый класс для `MealServiceTest` и `UserServiceTest`**.
+- 4: Запустить все тесты: `mvn test` (в IDEA Maven Lifecycle - test, кнопку skipTest отжать)
 
-Наиболее востребованные технологии /инструменты / фреймворки Java Enterprise:
-Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery + plugins.
+#### Optional
 
-- [Вступительное занятие](https://github.com/JavaOPs/topjava)
-- [Описание и план проекта](https://github.com/JavaOPs/topjava/blob/master/description.md)
-- [Wiki](https://github.com/JavaOPs/topjava/wiki)
-- [Wiki Git](https://github.com/JavaOPs/topjava/wiki/Git)
-- [Wiki IDEA](https://github.com/JavaOPs/topjava/wiki/IDEA)
-- [Демо разрабатываемого приложения](http://topjava.herokuapp.com/)
+- 5: Разделить `JdbcMealRepositoryImpl` для HSQLDB (она не умеет работать с Java8 Time API) и Postgres через `@Profile` (для Postgres оставить `LocalDateTime`). Цель задания -  потренироваться с [паттерном шаблонный метод](https://refactoring.guru/ru/design-patterns/template-method) и профилями Spring. Бины Spring мы разделяем (фильтруем) по разным профилям с помощью `beans profile` в xml конфигурации и `@Profile` (те мы конфигурируем, какие бины попадут в контекст Spring в зависимости от активных профилей приложения). 
+Абстрактные классы не создаются и в контекст не попадают. Профили, заданные в `@Profile` пересекаются с активными профилями приложения: если пересечение есть, то бин включается в контекст (cм. реализацию `@Profile` и в ней `ProfileCondition`, можно подебажить). Например при сконфигуренном `@Profile({"postgres","jdbc"})` бин попадет в контекст, если в профилях запущенного приложения есть хотя бы один из них (например "jdbc"). После выполнения разделения можно предложить решение проще.
+- 6: Починить `MealServlet` и использовать в `SpringMain` реализацию DB: добавить профили. Попробуйте поднять Spring контекст без использования `spring.profiles.active`.
+- 7: Сделать и протестировать в сервисах методы (тесты и реализация только для `DataJpa`)
+  - 7.1:  достать по id пользователя вместе с его едой
+  - 7.2:  достать по id еду вместе с пользователем
+  - 7.3:  обращения к DB сделать в одной транзакции (можно сделать разные варианты). <a href="https://en.wikibooks.org/wiki/Java_Persistence/OneToMany">Java Persistence/OneToMany</a>
 
-#### 26.10: Старт проекта
-- Начало проверки [вступительного задания](https://github.com/JavaOPs/topjava#-Домашнее-задание-hw0)
-
-#### 02.11: 1-е занятие
-- Разбор домашнего задания вступительного занятия (вместе с Optional)
-- Обзор используемых в проекте технологий. Интеграция ПО
-- Maven
-- WAR. Веб-контейнер Tomcat. Сервлеты
-- Логирование
-- Уровни и зависимости логгирования. JMX
-- Домашнее задание 1-го занятия (HW1 + Optional)
-
-#### 09.11: 2-е занятие
-- Разбор домашнего задания HW1 + Optional
-- Библиотека vs Фреймворк. Стандартные библиотеки Apache Commons, Guava
-- Слои приложения. Создание каркаса приложения
-- Обзор Spring Framework. Spring Context
-- Пояснения к HW2. Обработка Autowired
-- Домашнее задание (HW2 + Optional)
-
-#### 16.11: 3-е занятие
-- Разбор домашнего задания HW2 + Optional
-- Жизненный цикл Spring контекста
-- Тестирование через JUnit
-- Spring Test
-- Базы данных. Обзор NoSQL и Java persistence solution без ORM
-- Настройка Database в IDEA
-- Скрипты инициализации базы. Spring Jdbc Template
-- Подготовка тестовых данных и тестирование UserService
-- Логирование тестов
-- Домашнее задание (HW3 + Optional)
-
-#### 23.11: 4-е занятие
-- Разбор домашнего задания HW3 + Optional
-- Методы улучшения качества кода
-- Spring: инициализация и популирование DB
-- Подмена контекста при тестировании
-- ORM. Hibernate. JPA
-- Поддержка HSQLDB
-- Домашнее задание (HW4 + Optional)
-
-#### 30.11: 5-е занятие
-- Разбор вопросов
-- Разбор домашнего задания HW4 + Optional
-- Транзакции
-- Профили Maven и Spring
-- Пул коннектов
-- Spring Data JPA
-- Spring кэш
-- Домашнее задание (HW5 + Optional)
-
-#### 07.12: 6-е занятие
-- Разбор домашнего задания HW5 + Optional
-- Кэш Hibernate
-- Spring Web
-- JPS, JSTL, internationalization
-- Динамическое изменение профиля при запуске
-- Конфигурирование Tomcat через maven plugin. Jndi-lookup
-- Spring Web MVC
-- Spring Internationalization
-- Домашнее задание (HW6 + Optional)
-
-#### Перерыв. Делаем большое ДЗ и подтягиваем "хвосты".
-
-#### 21.12: 7-е занятие
-- Разбор домашнего задания HW6 + Optional
-- Автогенерация DDL по модели
-- Тестирование Spring MVC
-- REST контроллеры
-- Тестирование REST контроллеров. Jackson
-- jackson-datatype-hibernate. Тестирование через матчеры
-- Тестирование через SoapUi. UTF-8
-- Домашнее задание (HW7 + Optional)
-
-#### 28.12: 8-е занятие
-- Разбор домашнего задания HW7 + Optional
-- WebJars. jQuery и JavaScript frameworks
-- Bootstrap
-- AJAX. Datatables. jQuery
-- jQuery notifications plugin
-- Добавление Spring Security
-- Домашнее задание (HW8 + Optional)
-
-#### 04.01: 9-е занятие
-- Разбор домашнего задания HW8 + Optional
-- Spring Binding
-- Spring Validation
-- Перевод DataTables на Ajax
-- Форма login / logout
-- Реализация собственного провайдера авторицазии
-- Принцип работы Spring Security. Проксирование
-- Spring Security Test
-- Cookie. Session
-- Домашнее задание (HW9 + Optional)
-
-#### 11.01: 10-е занятие
-- Разбор домашнего задания HW10 + Optional
-- Spring Security Taglib. Method Security Expressions
-- Интерсепторы. Редактирование профиля. JSP tag files
-- Форма регистрации
-- Обработка исключений в Spring
-- Encoding password
-- Защита от межсайтовой подделки запросов (CSRF)
-- Домашнее задание (HW10)
-
-#### 18.01: 11-е занятие
-- Разбор домашнего задания HW10 + Optional
-- Рефакторинг
-- Фильтруем JSON через @JsonView 
-- Деплой [приложения в Heroku](http://topjava.herokuapp.com)
-- Возможные доработки приложения
-- Опрос участников проекта
-- Домашнее задание по проекту: составление резюме
+---------------------
