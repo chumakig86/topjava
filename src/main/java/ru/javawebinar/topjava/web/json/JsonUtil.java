@@ -58,4 +58,7 @@ public class JsonUtil {
         }
         return map;
     }
+    public static <T> String writeArray(T... array) {
+        return writeValue(array);
+    }
 }
