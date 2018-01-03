@@ -1,8 +1,17 @@
-var ajaxUrl = 'ajax/profile/meals/';
+var ajaxUrl = "ajax/profile/meals/";
 var datatableApi;
 
+function updateTable() {
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "filter",
+        data: $("#filter").serialize(),
+        success: updateTableByData
+    });
+}
+
 $(function () {
-    datatableApi = $('#datatable').DataTable({
+    datatableApi = $("#datatable").DataTable({
         "paging": false,
         "info": true,
         "columns": [
@@ -27,7 +36,7 @@ $(function () {
         "order": [
             [
                 0,
-                "asc"
+                "desc"
             ]
         ]
     });

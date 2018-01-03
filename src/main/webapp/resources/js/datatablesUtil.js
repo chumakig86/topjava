@@ -1,15 +1,9 @@
+var form;
+
 function makeEditable() {
-    $(".delete").click(function () {
-        deleteRow($(this).attr("id"));
-    });
-
-    $("#detailsForm").submit(function () {
-        save();
-        return false;
-    });
-
+    form = $('#detailsForm');
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
-        failNoty(jqXHR);
+        failNoty(event, jqXHR, options, jsExc);
     });
 
     // solve problem with cache in IE: https://stackoverflow.com/a/4303862/548473
@@ -17,7 +11,7 @@ function makeEditable() {
 }
 
 function add() {
-    $("#detailsForm").find(":input").val("");
+    form.find(":input").val("");
     $("#editRow").modal();
 }
 
@@ -32,14 +26,11 @@ function deleteRow(id) {
     });
 }
 
-function updateTable() {
-    $.get(ajaxUrl, function (data) {
-        datatableApi.clear().rows.add(data).draw();
-    });
+function updateTableByData(data) {
+    datatableApi.clear().rows.add(data).draw();
 }
 
 function save() {
-    var form = $("#detailsForm");
     $.ajax({
         type: "POST",
         url: ajaxUrl,
@@ -71,7 +62,7 @@ function successNoty(text) {
     }).show();
 }
 
-function failNoty(jqXHR) {
+function failNoty(event, jqXHR, options, jsExc) {
     closeNoty();
     failedNote = new Noty({
         text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;Error status: " + jqXHR.status,
