@@ -37,8 +37,9 @@
                 </form>
                 <hr>
 
-                <a class="btn btn-sm btn-info" onclick="add()">
+                <a class="btn btn-primary" onclick="add()">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <spring:message code="common.add"/>
                 </a>
                 <%--<a href="meals/create"><spring:message code="meals.add"/></a>--%>
 
@@ -64,17 +65,9 @@
                             <td>${meal.description}</td>
                             <td>${meal.calories}</td>
 
-                            <td><a class="btn btn-xs btn-primary edit"  id="${meal.id}">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </a>
-                                    <%--<a href="meals/update?id=${meal.id}"><spring:message code="common.update"/></a>--%>
-                            </td>
+                            <td><a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
 
-                            <td><a class="btn btn-xs btn-danger delete" onclick="deleteRow(${meal.id})">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </a>
-                                    <%--<a href="meals/delete?id=${meal.id}"><spring:message code="common.delete"/></a>--%>
-                            </td>
+                            <td><a class="delete" id="${meal.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                         </tr>
                     </c:forEach>
                 </table>
