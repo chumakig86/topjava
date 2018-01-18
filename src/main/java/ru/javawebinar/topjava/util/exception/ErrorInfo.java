@@ -2,12 +2,16 @@ package ru.javawebinar.topjava.util.exception;
 
 public class ErrorInfo {
     private final String url;
-    private final ErrorType type;
-    private final String detail;
+    private final String cause;
+    private final String[] details;
 
-    public ErrorInfo(CharSequence url, ErrorType type, String detail) {
+    public ErrorInfo(CharSequence url, Throwable ex) {
+        this(url, ex.getClass().getSimpleName(), ex.getLocalizedMessage());
+    }
+
+    public ErrorInfo(CharSequence url, String cause, String... details) {
         this.url = url.toString();
-        this.type = type;
-        this.detail = detail;
+        this.cause = cause;
+        this.details = details;
     }
 }
