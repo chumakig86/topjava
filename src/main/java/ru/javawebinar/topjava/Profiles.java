@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava;
 
-public class Profiles {
+public final class Profiles {
     public static final String
             JDBC = "jdbc",
             JPA = "jpa",
@@ -12,6 +12,8 @@ public class Profiles {
             POSTGRES_DB = "postgres",
             HSQL_DB = "hsqldb",
             HEROKU = "heroku";
+
+    private Profiles () {}
 
     //  Get DB profile depending of DB driver in classpath
     public static String getActiveDbProfile() {

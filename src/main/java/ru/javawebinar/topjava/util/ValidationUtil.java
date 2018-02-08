@@ -4,7 +4,7 @@ import ru.javawebinar.topjava.HasId;
 import ru.javawebinar.topjava.util.exception.IllegalRequestDataException;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
-public class ValidationUtil {
+public final class ValidationUtil {
     private ValidationUtil() {
     }
 
@@ -45,10 +45,11 @@ public class ValidationUtil {
     //  http://stackoverflow.com/a/28565320/548473
     public static Throwable getRootCause(Throwable t) {
         Throwable result = t;
-        Throwable cause;
+        Throwable cause = result.getCause();
 
-        while (null != (cause = result.getCause()) && (result != cause)) {
+        while (null != cause && !result.equals(cause)) {
             result = cause;
+            cause = result.getCause();
         }
         return result;
     }

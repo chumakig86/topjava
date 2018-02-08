@@ -153,7 +153,7 @@ public class User extends AbstractNamedEntity {
         return "User{" +
                 "id=" + id +
                 ", email=" + email +
-                ", name=" + name +
+                ", name=" + getName() +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
                 ", caloriesPerDay=" + caloriesPerDay +

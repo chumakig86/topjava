@@ -18,8 +18,8 @@ import static ru.javawebinar.topjava.UserTestData.USER;
 @Repository
 public class InMemoryUserRepositoryImpl implements UserRepository {
 
-    private Map<Integer, User> repository = new ConcurrentHashMap<>();
-    private AtomicInteger counter = new AtomicInteger(100);
+    private final Map<Integer, User> repository = new ConcurrentHashMap<>();
+    private final AtomicInteger counter = new AtomicInteger(100);
 
     public void init() {
         repository.clear();

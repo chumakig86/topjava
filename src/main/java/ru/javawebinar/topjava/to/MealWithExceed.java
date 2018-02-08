@@ -44,20 +44,20 @@ public class MealWithExceed extends BaseTo {
         MealWithExceed that = (MealWithExceed) o;
         return calories == that.calories &&
                 exceed == that.exceed &&
-                Objects.equals(id, that.id) &&
+                Objects.equals(getId(), that.getId()) &&
                 Objects.equals(dateTime, that.dateTime) &&
                 Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dateTime, description, calories, exceed);
+        return Objects.hash(getId(), dateTime, description, calories, exceed);
     }
 
     @Override
     public String toString() {
         return "MealWithExceed{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +

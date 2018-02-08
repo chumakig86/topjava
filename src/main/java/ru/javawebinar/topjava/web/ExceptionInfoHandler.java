@@ -34,7 +34,7 @@ import static ru.javawebinar.topjava.util.exception.ErrorType.*;
 @RestControllerAdvice(annotations = RestController.class)
 @Order(Ordered.HIGHEST_PRECEDENCE + 5)
 public class ExceptionInfoHandler {
-    private static Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
     public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
     public static final String EXCEPTION_DUPLICATE_DATETIME = "exception.meal.duplicateDateTime";
@@ -47,8 +47,12 @@ public class ExceptionInfoHandler {
                 }
             });
 
+    private final MessageUtil messageUtil;
+
     @Autowired
-    private MessageUtil messageUtil;
+    public ExceptionInfoHandler(MessageUtil messageUtil) {
+        this.messageUtil = messageUtil;
+        }
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ErrorInfo> applicationError(HttpServletRequest req, ApplicationException appEx) {
@@ -97,7 +101,7 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true, APP_ERROR);
     }
 
-    private ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException, ErrorType errorType, String... details) {
+    private  ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException, ErrorType errorType, String... details) {
         Throwable rootCause = ValidationUtil.getRootCause(e);
         if (logException) {
             log.error(errorType + " at request " + req.getRequestURL(), rootCause);

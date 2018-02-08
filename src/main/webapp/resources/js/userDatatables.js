@@ -22,7 +22,7 @@ function enable(chkbox, id) {
 
 // $(document).ready(function () {
 $(function () {
-    datatableApi = $('#datatable').DataTable(extendsOpts({
+    datatableApi = $("#datatable").DataTable(extendsOpts({
         "columns": [
             {
                 "data": "name"

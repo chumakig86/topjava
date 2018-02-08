@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.web.json.JacksonObjectMapper.getMapper;
 
-public class JsonUtil {
+public final class JsonUtil {
+
+    private JsonUtil () {}
 
     public static <T> List<T> readValues(String json, Class<T> clazz) {
         ObjectReader reader = getMapper().readerFor(clazz);

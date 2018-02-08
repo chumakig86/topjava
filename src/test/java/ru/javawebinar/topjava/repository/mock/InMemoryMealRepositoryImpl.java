@@ -22,8 +22,8 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryMealRepositoryImpl.class);
 
     // Map  userId -> (mealId-> meal)
-    private Map<Integer, Map<Integer, Meal>> repository = new ConcurrentHashMap<>();
-    private AtomicInteger counter = new AtomicInteger(0);
+    private final Map<Integer, Map<Integer, Meal>> repository = new ConcurrentHashMap<>();
+    private final AtomicInteger counter = new AtomicInteger(0);
 
     @Override
     public Meal save(Meal meal, int userId) {
