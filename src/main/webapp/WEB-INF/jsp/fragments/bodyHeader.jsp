@@ -40,6 +40,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="${requestScope['javax.servlet.forward.request_uri']}?lang=en">English</a></li>
                         <li><a href="${requestScope['javax.servlet.forward.request_uri']}?lang=ru">Русский</a></li>
+                        <li><a href="${requestScope['javax.servlet.forward.request_uri']}?lang=uk">Українська</a></li>
                     </ul>
                 </li>
             </ul>
