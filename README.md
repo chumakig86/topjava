@@ -8,5 +8,5 @@ Java Enterprise Online Project
 
    
 ## <a href="description.md">Описание и план проекта</a>
-### <a href="http://chumak-calories.herokuapp.com/" target=_blank>Deployed application</a>
+## <a href="http://chumak-calories.herokuapp.com/" target=_blank>Deployed application</a>
 
