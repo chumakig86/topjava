@@ -56,7 +56,7 @@
 </div>
 <div class="container">
     <div class="lead">
-        &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava">Java Enterprise</a> <spring:message code="app.text"/>
+        &nbsp;&nbsp;&nbsp;<a href="https://github.com/chumakig86/topjava">Java Enterprise</a> <spring:message code="app.text"/>
     </div>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
