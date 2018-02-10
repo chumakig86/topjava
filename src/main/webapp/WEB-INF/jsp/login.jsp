@@ -21,8 +21,7 @@
             </div>
         </c:if>
         <br/>
-        <p>
-            <a class="btn btn-lg btn-success" href="register"><spring:message code="app.register"/> &raquo;</a>
+        <p><a class="btn btn-lg btn-success" href="register"><spring:message code="app.register"/> &raquo;</a>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('user@yandex.ru', 'password')">
                 <spring:message code="app.enter"/> User
             </button>
@@ -56,7 +55,9 @@
 </div>
 <div class="container">
     <div class="lead">
-        &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava/blob/master/description.md">Java Enterprise</a> <spring:message code="app.text"/>
+        <img src="resources/images/plate.jpg" class="pull-right">
+        &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava/blob/master/description.md">Java Enterprise</a>
+        <spring:message code="app.text"/>
     </div>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
