@@ -160,7 +160,6 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .content(jsonWithPassword(updated, "password")))
                 .andExpect(status().isConflict())
                 .andExpect(errorType(ErrorType.DATA_ERROR))
-                .andExpect(jsonMessage("$.details", EXCEPTION_DUPLICATE_EMAIL))
                 .andDo(print());
     }
 
@@ -173,8 +172,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN))
                 .content(jsonWithPassword(expected, "newPass")))
                 .andExpect(status().isConflict())
-                .andExpect(errorType(ErrorType.DATA_ERROR))
-                .andExpect(jsonMessage("$.details", EXCEPTION_DUPLICATE_EMAIL));
+                .andExpect(errorType(ErrorType.DATA_ERROR));
 
     }
 }

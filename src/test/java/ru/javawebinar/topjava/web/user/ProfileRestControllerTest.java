@@ -84,7 +84,6 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(updatedTo)))
                 .andExpect(status().isConflict())
                 .andExpect(errorType(ErrorType.DATA_ERROR))
-                .andExpect(jsonMessage("$.details", EXCEPTION_DUPLICATE_EMAIL))
                 .andDo(print());
     }
 }

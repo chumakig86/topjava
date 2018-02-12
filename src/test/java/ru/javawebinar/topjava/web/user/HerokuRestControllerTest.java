@@ -50,7 +50,6 @@ public class HerokuRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(errorType(ErrorType.APP_ERROR))
-                .andExpect(jsonMessage("$.details", EXCEPTION_MODIFICATION_RESTRICTION))
                 .andExpect(status().isUnavailableForLegalReasons());
     }
 
@@ -61,7 +60,6 @@ public class HerokuRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN))
                 .content(UserTestData.jsonWithPassword(USER, "password")))
                 .andExpect(errorType(ErrorType.APP_ERROR))
-                .andExpect(jsonMessage("$.details", EXCEPTION_MODIFICATION_RESTRICTION))
                 .andExpect(status().isUnavailableForLegalReasons());
     }
 }
