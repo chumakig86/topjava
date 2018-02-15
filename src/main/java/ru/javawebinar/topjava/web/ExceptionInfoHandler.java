@@ -3,7 +3,6 @@ package ru.javawebinar.topjava.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -40,7 +39,6 @@ public class ExceptionInfoHandler {
 
     public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
     public static final String EXCEPTION_DUPLICATE_DATETIME = "exception.meal.duplicateDateTime";
-    private MessageSource messageSource;
 
     private static final Map<String, String> CONSTRAINS_I18N_MAP = Collections.unmodifiableMap(
             new HashMap<String, String>() {
@@ -89,7 +87,7 @@ public class ExceptionInfoHandler {
                 .map(fe -> messageUtil.getMessage(fe))
                 .toArray(String[]::new);
 
-        if (details[0].startsWith("Failed to convert property value of type java.lang.String to required type java.lang.Integer for property calories; nested exception is java.lang.NumberFormatException: For input string:")) {
+        if (details[0].contains("NumberFormatException")) {
             return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR, messageUtil.getMessage("NumberFormat") );
         }
         else {

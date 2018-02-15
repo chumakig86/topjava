@@ -54,11 +54,11 @@
     </div>
 </div>
 <div class="container">
-    <div class="lead">
+    <P class="lead">
         <img src="resources/images/plate.jpg" class="pull-right">
         &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava/blob/master/description.md">Java Enterprise</a>
         <spring:message code="app.text"/>
-    </div>
+    </P>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 <script type="text/javascript">

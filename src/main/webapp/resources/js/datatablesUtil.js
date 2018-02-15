@@ -1,7 +1,36 @@
 var form;
+var failedNote;
+
+function closeNoty() {
+    if (failedNote) {
+        failedNote.close();
+        failedNote = undefined;
+    }
+}
+
+function failNoty(jqXHR) {
+    closeNoty();
+    // https://stackoverflow.com/questions/48229776
+    var errorInfo = JSON.parse(jqXHR.responseText);
+    failedNote = new Noty({
+        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + errorInfo.typeMessage + "<br>" + errorInfo.details.join("<br>"),
+        type: "error",
+        layout: "bottomRight"
+    }).show();
+}
+
+function successNoty(key) {
+    closeNoty();
+    new Noty({
+        text: "<span class='glyphicon glyphicon-ok'></span> &nbsp;" + i18n[key],
+        type: "success",
+        layout: "bottomRight",
+        timeout: 1000
+    }).show();
+}
 
 function makeEditable() {
-    form = $('#detailsForm');
+    form = $("#detailsForm");
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
     });
@@ -47,7 +76,7 @@ function updateRow(id) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
         });
-        $('#editRow').modal();
+        $("#editRow").modal();
     });
 }
 
@@ -75,36 +104,6 @@ function save() {
         updateTable();
         successNoty("common.saved");
     });
-}
-
-var failedNote;
-
-function closeNoty() {
-    if (failedNote) {
-        failedNote.close();
-        failedNote = undefined;
-    }
-}
-
-function successNoty(key) {
-    closeNoty();
-    new Noty({
-        text: "<span class='glyphicon glyphicon-ok'></span> &nbsp;" + i18n[key],
-        type: 'success',
-        layout: "bottomRight",
-        timeout: 1000
-    }).show();
-}
-
-function failNoty(jqXHR) {
-    closeNoty();
-    // https://stackoverflow.com/questions/48229776
-    var errorInfo = JSON.parse(jqXHR.responseText);
-    failedNote = new Noty({
-        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + errorInfo.typeMessage + "<br>" + errorInfo.details.join("<br>"),
-        type: "error",
-        layout: "bottomRight"
-    }).show();
 }
 
 function renderEditBtn(data, type, row) {

@@ -58,7 +58,7 @@ public class HerokuRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(put(REST_URL + USER_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
-                .content(UserTestData.jsonWithPassword(USER, "password")))
+                .content(jsonWithPassword(USER, "password")))
                 .andExpect(errorType(ErrorType.APP_ERROR))
                 .andExpect(status().isUnavailableForLegalReasons());
     }

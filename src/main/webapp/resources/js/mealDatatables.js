@@ -17,10 +17,10 @@ function clearFilter() {
 // http://api.jquery.com/jQuery.ajax/#using-converters
 $.ajaxSetup({
     converters: {
-        "text json": function (stringData) {
+        "text json" (stringData) {
             var json = JSON.parse(stringData);
             $(json).each(function () {
-                this.dateTime = this.dateTime.replace('T', ' ').substr(0, 16);
+                this.dateTime = this.dateTime.replace("T", " ").substr(0, 16);
             });
             return json;
         }
@@ -28,7 +28,7 @@ $.ajaxSetup({
 });
 
 $(function () {
-    datatableApi = $('#datatable').DataTable(extendsOpts({
+    datatableApi = $("#datatable").DataTable(extendsOpts({
         "columns": [
             {
                 "data": "dateTime"
@@ -56,20 +56,20 @@ $(function () {
                 "desc"
             ]
         ],
-        "createdRow": function (row, data, dataIndex) {
-            $(row).addClass(data.exceed ? 'exceeded' : 'normal');
+        "createdRow" (row, data, dataIndex) {
+            $(row).addClass(data.exceed ? "exceeded" : "normal");
         }
     }));
 
     $.datetimepicker.setLocale(localeCode);
 
 //  http://xdsoft.net/jqplugins/datetimepicker/
-    var startDate = $('#startDate');
-    var endDate = $('#endDate');
+    var startDate = $("#startDate");
+    var endDate = $("#endDate");
     startDate.datetimepicker({
         timepicker: false,
-        format: 'Y-m-d',
-        formatDate: 'Y-m-d',
+        format: "Y-m-d",
+        formatDate: "Y-m-d",
         onShow: function (ct) {
             this.setOptions({
                 maxDate: endDate.val() ? endDate.val() : false
@@ -78,21 +78,21 @@ $(function () {
     });
     endDate.datetimepicker({
         timepicker: false,
-        format: 'Y-m-d',
-        formatDate: 'Y-m-d',
-        onShow: function (ct) {
+        format: "Y-m-d",
+        formatDate: "Y-m-d",
+        onShow (ct) {
             this.setOptions({
                 minDate: startDate.val() ? startDate.val() : false
-            })
+            });
         }
     });
 
-    $('#startTime, #endTime').datetimepicker({
+    $("#startTime, #endTime").datetimepicker({
         datepicker: false,
-        format: 'H:i'
+        format: "H:i"
     });
 
-    $('#dateTime').datetimepicker({
-        format: 'Y-m-d H:i'
+    $("#dateTime").datetimepicker({
+        format: "Y-m-d H:i"
     });
 });
