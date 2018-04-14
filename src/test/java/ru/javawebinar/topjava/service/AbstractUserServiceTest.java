@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.service;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
